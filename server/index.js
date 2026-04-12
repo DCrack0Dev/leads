@@ -76,10 +76,14 @@ app.get('/api/bot/groups', (req, res) => {
   res.json(groups);
 });
 
-// Start server
-app.listen(config.port, () => {
-  console.log(`Server running on port ${config.port}`);
-  
-  // Start cron scheduler
-  startScheduler();
-});
+// Start server if not running on Vercel
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(config.port, () => {
+    console.log(`Server running on port ${config.port}`);
+    
+    // Start cron scheduler
+    startScheduler();
+  });
+}
+
+module.exports = app;
