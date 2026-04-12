@@ -1,0 +1,38 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+dist/
+build/
+.vercel
+
+# Database
+server/db/demitech.db
+*.sqlite
+*.db
+
+# Logs
+logs
+*.log
+
+# Demos (if you don't want to push generated demos)
+public/demos/

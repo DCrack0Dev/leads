@@ -1,0 +1,15 @@
+{
+  "name": "demitech-bot",
+  "version": "1.0.0",
+  "description": "Demitech Lead Acquisition Bot",
+  "main": "server/index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "start": "node server/index.js",
+    "build": "npm run build --prefix client",
+    "install-all": "npm install && npm install --prefix server && npm install --prefix client"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
