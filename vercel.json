@@ -20,5 +20,11 @@
       "source": "/(.*)",
       "destination": "client/$1"
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/bot-run",
+      "schedule": "*/5 * * * *"
+    }
   ]
 }

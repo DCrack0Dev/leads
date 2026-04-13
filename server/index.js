@@ -76,6 +76,28 @@ app.get('/api/bot/groups', (req, res) => {
   res.json(groups);
 });
 
+// Cron endpoint for Vercel
+app.get('/api/bot-run', async (req, res) => {
+  // Use a secret key to prevent unauthorized triggers if needed
+  // For now, we'll just run a small batch
+  try {
+    console.log('Cron job triggered: /api/bot-run');
+    // We can logic here to pick a group or city that hasn't been scanned recently
+    const groups = Object.keys(REGIONAL_GROUPS);
+    const randomGroup = groups[Math.floor(Math.random() * groups.length)];
+    
+    // In a serverless environment, we must await the result because the function 
+    // will be terminated as soon as the response is sent.
+    // To stay under the timeout, we should modify findLeads to support smaller chunks.
+    await findLeads(randomGroup, (logLine) => console.log(logLine));
+    
+    res.json({ message: `Cron run successful for ${randomGroup}` });
+  } catch (error) {
+    console.error('Cron job failed:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Start server if not running on Vercel
 if (process.env.NODE_ENV !== 'production') {
   app.listen(config.port, () => {
