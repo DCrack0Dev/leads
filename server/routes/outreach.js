@@ -5,11 +5,16 @@ const { sendOutreachEmail, generateWhatsAppMessage } = require('../jobs/outreach
 
 // POST send email to one lead
 router.post('/email/:id', async (req, res) => {
-  const success = await sendOutreachEmail(req.params.id);
-  if (success) {
-    res.json({ message: 'Email sent successfully' });
-  } else {
-    res.status(500).json({ error: 'Failed to send email' });
+  try {
+    const success = await sendOutreachEmail(req.params.id);
+    if (success) {
+      res.json({ message: 'Email sent successfully' });
+    } else {
+      res.status(500).json({ error: 'Failed to send email. Check server logs for Brevo details.' });
+    }
+  } catch (error) {
+    console.error('Route Error /api/outreach/email/:id:', error);
+    res.status(500).json({ error: error.message });
   }
 });
 
