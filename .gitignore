@@ -36,3 +36,6 @@ logs
 
 # Demos (if you don't want to push generated demos)
 public/demos/
+
+.vercel
+.env*.local

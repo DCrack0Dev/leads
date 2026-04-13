@@ -86,6 +86,9 @@ async function sendOutreachEmail(leadId) {
     return true;
   } catch (error) {
     console.error(`Error sending email to ${lead.business_name}:`, error.message);
+    if (error.response && error.response.body) {
+      console.error('Brevo Error Body:', JSON.stringify(error.response.body, null, 2));
+    }
     return false;
   }
 }
